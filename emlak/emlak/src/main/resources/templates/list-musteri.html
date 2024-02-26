@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>EmLak Ofis</title>
+
+    <style>
+        /* Genel stil ve düzenlemeler */
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            padding-top: 20px;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .update-delete-btns {
+            display: flex;
+            justify-content: center;
+        }
+
+        .update-delete-btns form {
+            margin: 0;
+        }
+
+        .update-delete-btns button {
+            margin: 5px;
+        }
+
+        .back-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Başlık stilleri */
+        .table-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Başlık gölgesi */
+        }
+
+        /* Ana renkler */
+        .btn-primary {
+            background-color: #4CAF50; /* Düğme arka plan rengi */
+            border-color: #4CAF50; /* Düğme kenarlık rengi */
+        }
+
+        .btn-secondary {
+            background-color: #FF9800; /* Düğme arka plan rengi */
+            border-color: #FF9800; /* Düğme kenarlık rengi */
+        }
+
+        /* Düğme stilleri */
+        .btn {
+            font-size: 14px;
+            padding: 5px 15px;
+            border-radius: 20px; /* Düğme kenar yuvarlama */
+        }
+
+        /* Hücre stil ve düzenlemeleri */
+        .cell {
+            padding: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+            background-color: #FFFFFF; /* Hücre arka plan rengi */
+            border-bottom: 1px solid #E0E0E0; /* Alt kenarlık */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Hücre gölgesi */
+        }
+
+        /* Tablo satırları arasında alternatif arka plan renkleri */
+        .table tbody tr:nth-child(odd) {
+            background-color: #FAFAFA;
+        }
+
+        .table tbody tr:hover {
+            background-color: #F0F0F0; /* Fare üzerine gelindiğinde arka plan rengi */
+            transition: background-color 0.3s ease-in-out; /* Animasyonlu geçiş */
+        }
+
+        /* Buton hover efekti */
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Buton hover efektiyle renk değişimi */
+        .btn:hover {
+            filter: brightness(120%);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h3 class="table-title">Müşteri Listesi</h3>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th class="cell">Müşteri Id</th>
+            <th class="cell">Ad</th>
+            <th class="cell">Soyad</th>
+            <th class="cell">Telefon</th>
+            <th class="cell">İşlem</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempMusteri : ${musteri}">
+            <td class="cell" th:text="${tempMusteri.mId}"></td>
+            <td class="cell" th:text="${tempMusteri.mAd}"></td>
+            <td class="cell" th:text="${tempMusteri.mSoyad}"></td>
+            <td class="cell" th:text="${tempMusteri.mCeptel}"></td>
+
+            <!-- Güncelleme ve silme işlemleri -->
+            <td class="cell">
+                <div class="update-delete-btns">
+                    <form action="#" th:action="@{/musteri/showFormForMusteriUpdate}" method="POST">
+                        <input type="hidden" name="id" th:value="${tempMusteri.mId}" />
+                        <button type="submit" class="btn btn-info btn-sm me-1">Güncelle</button>
+                    </form>
+                    <form action="#" th:action="@{/musteri/musteridelete}" method="POST">
+                        <input type="hidden" name="id" th:value="${tempMusteri.mId}" />
+                        <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="if (!(confirm('Kayıt Silinecek?'))) return false">Sil</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="back-links">
+        <a th:href="@{/menu}" class="btn btn-primary">Ana Menü</a>
+        <a th:href="@{/menu/showFormForMusteriAdd}" class="btn btn-secondary">Geri</a>
+    </div>
+
+</div>
+
+</body>
+</html>

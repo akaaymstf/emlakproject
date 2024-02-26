@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emlak Ofisi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            max-width: 800px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #0056b3; /* Mavi renk */
+        }
+
+        .form-control {
+            border-radius: 5px;
+            border-color: #0056b3; /* Mavi renk */
+        }
+
+        .btn-submit {
+            width: 100px;
+            margin-top: 20px;
+            background-color: #0056b3; /* Mavi renk */
+            border-color: #0056b3; /* Mavi renk */
+        }
+
+        .btn-submit:hover {
+            background-color: #003366; /* Koyu mavi renk */
+            border-color: #003366; /* Koyu mavi renk */
+        }
+
+        .btn-back {
+            margin-top: 20px;
+            background-color: #6c757d; /* Gri renk */
+            border-color: #6c757d; /* Gri renk */
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268; /* Koyu gri renk */
+            border-color: #5a6268; /* Koyu gri renk */
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3 class="text-center mb-4">Emlak Kayıt</h3>
+
+    <form action="#" th:action="@{/emlak/emlaksave}" th:object="${emlak}" method="POST" id="emlakForm">
+
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group row">
+            <label for="adres" class="col-sm-3 col-form-label form-label">Adres:</label>
+            <div class="col-sm-9">
+                <input type="text" th:field="*{adres}" id="adres" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="fiyat" class="col-sm-3 col-form-label form-label">Fiyat (₺):</label>
+            <div class="col-sm-9">
+                <input type="text" th:field="*{fiyat}" id="fiyat" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="boyut" class="col-sm-3 col-form-label form-label">Boyut (m2):</label>
+            <div class="col-sm-9">
+                <input type="text" th:field="*{boyut}" id="boyut" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="oda" class="col-sm-3 col-form-label form-label">Oda Sayısı:</label>
+            <div class="col-sm-9">
+                <input type="text" th:field="*{oda}" id="oda" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="durum" class="col-sm-3 col-form-label form-label">Emlak Durumu (S/K):</label>
+            <div class="col-sm-9">
+                <input type="text" th:field="*{durum}" id="durum" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="tur" class="col-sm-3 col-form-label form-label">Emlak Türü:</label>
+            <div class="col-sm-9">
+                <input type="text" th:field="*{tur}" id="tur" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="sonDurum" class="col-sm-3 col-form-label form-label">Son Durumu:</label>
+            <div class="col-sm-9">
+                <input type="text" th:field="*{sonDurum}" id="sonDurum" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="isyeri" class="col-sm-3 col-form-label form-label">Ait Olduğu İşyeri:</label>
+            <div class="col-sm-9">
+                <input type="text" th:field="*{isyeri}" id="isyeri" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="musteri" class="col-sm-3 col-form-label form-label">Ait Olduğu Müşteri:</label>
+            <div class="col-sm-9">
+                <input type="text" th:field="*{musteri}" id="musteri" class="form-control">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-submit">Kaydet</button>
+    </form>
+    <hr>
+
+    <div class="text-center">
+        <a th:href="@{/menu}" class="btn btn-secondary btn-back">Ana Menü</a>
+        <a th:href="@{/emlak/emlaklist}" class="btn btn-secondary btn-back">Emlak Listesi</a>
+    </div>
+
+</div>
+</body>
+</html>
